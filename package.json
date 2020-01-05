@@ -1,0 +1,20 @@
+{
+  "name": "fb-studies",
+  "version": "1.0.0",
+  "description": "Pacote contendo apenas o firebase para expor o metodos e conseguirmos visualizar de forma mais fácil durante o desenvolvimento",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luiz Jaco",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^7.6.1"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "firebase",
+    "studies",
+    "javascript"
+  ]
+}
