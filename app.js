@@ -9,7 +9,7 @@ var NOMES = ["Anderson", "Beatriz", "Caio", "Daniela", "Everton", "Fabiana", "Ga
  */
 function criarCard() {
     var card = {
-        nome: NOMES[Math.floor(Math.random() * NOMES.length - 1)],
+        nome: NOMES[Math.floor(Math.random() * (NOMES.length - 1))],
         idade: Math.floor(Math.random() * 22 + 18),
         curtidas: 0
     };
@@ -28,9 +28,24 @@ function criarCard() {
      */
     firebase.firestore().collection('cards').add(card).then(() => {
         console.log('dados salvos');
-        adicionaCardATela(card, 1);
     });
 };
+
+/**
+ * Limpar todos os cards
+ */
+function limpar() {
+    firebase.firestore().collection('cards').get().then(snapshot => {
+        snapshot.docs.forEach(doc => {
+            this.deletar(doc.id);
+        });
+    });
+    var child = CARD_CONTAINER.lastElementChild;
+    while (child) {
+        CARD_CONTAINER.removeChild(child);
+        child = CARD_CONTAINER.lastElementChild;
+    }
+}
 
 /**
  * Recebe a referencia do card e exclui do banco de dados
@@ -39,7 +54,7 @@ function criarCard() {
 function deletar(id) {
     var card = document.getElementById(id);
     firebase.firestore().collection('cards').doc(id).delete().then(() => {
-        card.remove();
+        card.parentElement.removeChild(card);
     });
 };
 
